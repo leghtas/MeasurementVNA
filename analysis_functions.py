@@ -782,7 +782,16 @@ def complex_a_out(f, f_0, kc, ki, a_in, T): #kc and ki are kappas/2pi
     else:
         return np.Inf
 
-def fit_complex_a_out(f, a_out, f_0=7.226e9, kc=500e3, ki=500e3, a_in=None, T=0e-9):
+def get_f0_reflection(f, a_out):
+    phase = np.unwrap(np.angle(a_out))
+    phase_avg = (np.min(phase)+np.max(phase))/2
+    spline = splrep(f, phase-phase_avg)
+    roots = sproot(spline)
+    return roots[0]
+    
+def fit_complex_a_out(f, a_out, f_0=None, kc=500e3, ki=500e3, a_in=None, T=0e-9):
+    if f_0==None:
+        f_0 = get_f0_reflection(f, a_out)
     def aux(f, f_0, kc, ki, re_a_in, im_a_in, T):
         return complex_a_out(f, f_0, kc, ki, re_a_in + 1j*im_a_in, T)
     if a_in is None:

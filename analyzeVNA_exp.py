@@ -38,7 +38,7 @@ kc_guess = 18736539
 ki_guess = 5465667
 for n in range(genpoints):
     data_n = data_complex[n]
-    popt = af.fit_complex_a_out(vna_freqs, data_n, f_0=f_0_guess, kc=kc_guess, ki=ki_guess)
+    popt = af.fit_complex_a_out(vna_freqs, data_n, f_0=None, kc=kc_guess, ki=ki_guess)
     freqs_fit[n]=popt[0] 
     kc_fit[n]=popt[1]
     ki_fit[n]=popt[2]
