@@ -782,7 +782,7 @@ def complex_a_out(f, f_0, kc, ki, a_in, T): #kc and ki are kappas/2pi
     else:
         return np.Inf
 
-def fit_complex_a_out(f, a_out, f_0=7.226e9, kc=500e3, ki=500e3, a_in=None, T=70e-9):
+def fit_complex_a_out(f, a_out, f_0=7.226e9, kc=500e3, ki=500e3, a_in=None, T=0e-9):
     def aux(f, f_0, kc, ki, re_a_in, im_a_in, T):
         return complex_a_out(f, f_0, kc, ki, re_a_in + 1j*im_a_in, T)
     if a_in is None:
